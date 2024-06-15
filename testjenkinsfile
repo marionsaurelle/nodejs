@@ -3,9 +3,11 @@ pipeline{
 
     stages{
         stage('Dep install'){
-            agent { docker { image 'nodejs'}}
+            agent { docker { image 'node:14'
+               args '-u root:root'}}
             steps{
-                sh 'sudo chown -R 995:993 "/.npm'
+             //   sh 'npm cache clean'
+             //   sh 'sudo chown -R 995:993 "/.npm'
                 sh'npm install'
             }
         }
