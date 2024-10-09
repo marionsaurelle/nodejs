@@ -17,7 +17,7 @@ pipeline{
         }
         stage('upload artifact'){
             steps{
-                curl '-uadmin:AP2M4cAV2LdZbQyLZfXHmJZLYBm -T \
+                sh 'curl -uadmin:AP2M4cAV2LdZbQyLZfXHmJZLYBm -T \
                 *.tgz \
                 "http://ec2-18-212-60-164.compute-1.amazonaws.com:8081/artifactory/utc-nodejs/utc-app-${BUILD_ID}.tgz"'
             }
