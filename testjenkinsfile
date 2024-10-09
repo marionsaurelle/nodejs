@@ -1,27 +1,14 @@
 pipeline{
-    agent { docker { image 'node:14'
-               args '-u root:root'}}
-
+    agent any 
     stages{
         stage('Dep install'){
+            agent { docker { image 'node:14'
+              args '-u root:root'}}
             steps{
-             //  sh 'npm cache clean'
-             //  sh 'sudo chown -R 995:993 "/.npm"'   
-                sh 'npm.install'
-            }
+              //   sh 'npm cache clean'
+              //   sh 'sudo chown -R 995:993 "/.npm"'
+                  sh 'npm install'
+            }  
         }
-        stage('package'){
-            steps{
-                sh 'rm -rf *.tgz || echo ""'
-                sh 'npm pack'
-            }
-        }
-        stage('upload artifact'){
-            steps{
-                sh 'curl -uadmin:AP2M4cAV2LdZbQyLZfXHmJZLYBm -T \
-                *.tgz \
-                "http://ec2-18-212-60-164.compute-1.amazonaws.com:8081/artifactory/utc-nodejs/utc-app-${BUILD_ID}.tgz"'
-            }
-        }
-    }   
+    }
 }
